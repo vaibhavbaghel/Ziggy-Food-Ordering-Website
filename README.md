@@ -24,16 +24,16 @@ This repository hosts the source code for ZIGGY, a dynamic food ordering website
 
 ## Screenshots
 
-![Hero](Screenshots\Hero_Section.png)
+![Hero](Screenshots/Hero_Section.png)
 - Hero Section
 
-![Products](Screenshots\Product_Section.png)
+![Products](Screenshots/Product_Section.png)
 - Products Section
 
-![Cart](Screenshots\Cart_Page.png)
+![Cart](Screenshots/Cart_Page.png)
 - Cart Page
 
-![Login](Screenshots\Login_Popup.png)
+![Login](Screenshots/Login_Popup.png)
 - Login Popup
 
 
