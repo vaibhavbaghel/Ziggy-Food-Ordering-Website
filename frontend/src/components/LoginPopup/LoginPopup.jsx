@@ -28,6 +28,7 @@ const LoginPopup = ({ setShowLogin }) => {
     } else {
       newUrl += "/api/user/register";
     }
+    try{
     const response = await axios.post(newUrl, data);
     if (response.data.success) {
       setToken(response.data.token);
@@ -36,6 +37,10 @@ const LoginPopup = ({ setShowLogin }) => {
       setShowLogin(false);
     }else{
       toast.error(response.data.message);
+    }
+    } catch (error) {
+      console.error("Error during login:", error);
+      toast.error("An error occurred during login. Please try again.");
     }
   };
   return (
