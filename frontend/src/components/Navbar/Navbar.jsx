@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import "./Navbar.css";
 import { assets } from "../../assets/frontend_assets/assets";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,10 @@ import { toast } from "react-toastify";
 
 const Navbar = ({ setShowLogin }) => {
   const [menu, setMenu] = useState("home");
-  const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+  const { getTotalCartAmount, token, setToken, setSearchQuery } = useContext(StoreContext);
+  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const searchRef = useRef(null);
   const navigate=useNavigate();
 
   const logout=()=>{
@@ -15,6 +18,27 @@ const Navbar = ({ setShowLogin }) => {
     setToken("");
     toast.success("Logout Successfully")
     navigate("/");
+  }
+
+  useEffect(()=>{
+    if(showSearchInput && searchRef.current){
+      searchRef.current.focus();
+    }
+  },[showSearchInput])
+
+  const toggleSearch = () => {
+    setShowSearchInput((prev) => !prev);
+    if(showSearchInput){
+      // clearing when closing
+      setSearchValue("");
+      setSearchQuery("");
+    }
+  };
+
+  const onSearchChange = (e) => {
+    const val = e.target.value;
+    setSearchValue(val);
+    setSearchQuery(val);
   }
   return (
     <div className="navbar">
@@ -52,7 +76,17 @@ const Navbar = ({ setShowLogin }) => {
         </a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} alt="" />
+        <img src={assets.search_icon} alt="" onClick={toggleSearch} style={{cursor:'pointer'}} />
+        {showSearchInput && (
+          <input
+            ref={searchRef}
+            className="navbar-search-input"
+            type="text"
+            placeholder="Search dishes..."
+            value={searchValue}
+            onChange={onSearchChange}
+          />
+        )}
         <div className="navbar-search-icon">
           <Link to="/cart">
             <img src={assets.basket_icon} alt="" />

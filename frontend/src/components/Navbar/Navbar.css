@@ -131,3 +131,16 @@
         display: none;
     }
 }
+
+.navbar-search-input{
+    padding: 6px 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    outline: none;
+    width: 180px;
+    transition: width 0.2s ease;
+}
+.navbar-search-input:focus{
+    border-color: tomato;
+    box-shadow: 0 0 0 3px rgba(255,99,71,0.06);
+}
